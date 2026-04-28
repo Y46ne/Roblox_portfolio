@@ -202,6 +202,17 @@
         .f { color: #61afef; } /* Function */
         .c { color: #5c6370; font-style: italic; } /* Comment */
 
+        .warning-banner {
+            background: #fff3cd;
+            border-bottom: 2px solid #ffc107;
+            padding: 16px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #856404;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 950px) {
             .project-card { grid-template-columns: 1fr; }
             .project-info { grid-column: span 1; }
@@ -209,6 +220,10 @@
     </style>
 </head>
 <body>
+
+    <div class="warning-banner">
+        ⚠️ The code snippets displayed on this website are placeholder examples and do not represent the actual game code.
+    </div>
 
     <header>
         <span class="badge">Open for Commissions</span>
@@ -400,6 +415,36 @@
             <div class="project-info">
                 <h3>Incremental "Weight" System</h3>
                 <p>Efficient math handling for large numbers. Features a prestige mechanic and a centralized configuration module for easy balancing.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="video-container">
+                <video autoplay muted loop playsinline><source src="assets/Flashbang.mp4" type="video/mp4"></video>
+            </div>
+            <div class="code-window">
+                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre class="code-section"><code><span class="c">-- Flashbang Throw Mechanics</span>
+<span class="k">local</span> Flashbang = {}
+<span class="k">function</span> Flashbang:<span class="f">throw</span>(velocity, player)
+    <span class="k">local</span> bang = Instance.<span class="f">new</span>(<span class="s">"Part"</span>)
+    bang.Velocity = velocity
+    bang.Parent = workspace
+    
+    <span class="c">-- Trigger flash effect on impact</span>
+    <span class="k">local</span> <span class="k">function</span> <span class="f">onHit</span>()
+        <span class="k">for</span> _, humanoid <span class="k">in</span> <span class="f">pairs</span>(game.Players) <span class="k">do</span>
+            <span class="k">local</span> dist = (humanoid.Parent.Head.Position - bang.Position).<span class="f">Magnitude</span>
+            <span class="k">if</span> dist &lt; <span class="s">50</span> <span class="k">then</span>
+                <span class="f">flashPlayer</span>(humanoid)
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span></code></pre>
+            </div>
+            <div class="project-info">
+                <h3>Flashbang Mechanics (Apex Legends Style)</h3>
+                <p>Throw physics with impact detection and multi-target flash effect. Features configurable range, hold animations, and trajectory visualization.</p>
             </div>
         </div>
 
