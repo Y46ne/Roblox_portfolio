@@ -3,23 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Y46ne | Scripting Portfolio</title>
+    <title>Y46ne | Full-Stack Scripter</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
+        /* --- Light Theme (Default) --- */
         :root {
             --bg: #f7f3f0; 
             --card-bg: #ffffff;
             --accent: #2d332e; 
             --text-main: #1a1a1a;
             --text-dim: #706f6c;
-            --glass: rgba(255, 255, 255, 0.5);
-            --border: rgba(0, 0, 0, 0.06);
+            --glass: rgba(255, 255, 255, 0.7);
+            --border: rgba(0, 0, 0, 0.08);
+            
+            --badge-bg: #e3f5e1;
+            --badge-text: #2b6a27;
+            --badge-border: #b7e0b5;
+            
+            --warn-bg: #fff3cd;
+            --warn-text: #856404;
+            --warn-border: #ffc107;
+        }
+
+        /* --- Dark Theme --- */
+        body.dark-theme {
+            --bg: #121212; 
+            --card-bg: #1e1e1e;
+            --accent: #ffffff; 
+            --text-main: #ffffff; 
+            --text-dim: #e5e5e5; 
+            --glass: rgba(18, 18, 18, 0.8);
+            --border: rgba(255, 255, 255, 0.15); 
+            
+            --badge-bg: rgba(74, 222, 128, 0.1);
+            --badge-text: #4ade80;
+            --badge-border: rgba(74, 222, 128, 0.3);
+
+            --warn-bg: rgba(255, 193, 7, 0.1);
+            --warn-text: #ffca28;
+            --warn-border: rgba(255, 193, 7, 0.3);
         }
 
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Instrument Sans', sans-serif;
@@ -28,236 +58,315 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* --- Header --- */
-        header {
-            padding: 120px 20px 60px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
+        /* --- Typography & Basics --- */
+        h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -1px; }
+        .section-title { font-size: 3rem; margin-bottom: 20px; letter-spacing: -2px; color: var(--text-main); }
+        .section-subtitle { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 60px; max-width: 600px; }
+        
+        .category-title {
+            font-size: 2rem;
+            margin: 80px 0 40px;
+            padding-bottom: 15px;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: border-color 0.3s ease;
+        }
+        .category-title:first-of-type { margin-top: 10px; }
+
+        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
+
+        /* --- Warning Banner --- */
+        .warning-banner {
+            background: var(--warn-bg); border-bottom: 2px solid var(--warn-border);
+            padding: 12px 20px; text-align: center; font-size: 0.9rem;
+            color: var(--warn-text); font-weight: 500; transition: all 0.3s ease;
         }
 
+        /* --- Hero Section --- */
+        #home {
+            min-height: 80vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding-top: 50px;
+        }
         .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+            display: inline-block; padding: 8px 16px; background: var(--badge-bg);
+            color: var(--badge-text); border: 1px solid var(--badge-border);
+            border-radius: 100px; font-size: 0.8rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 25px; transition: all 0.3s ease;
         }
-
-        h1 {
-            font-size: clamp(3.5rem, 12vw, 6rem);
-            margin: 0;
-            font-weight: 600;
-            letter-spacing: -4px;
-            line-height: 0.85;
-        }
-
-        .bio {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            margin-top: 30px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        #home h1 { font-size: clamp(4rem, 10vw, 7rem); letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; }
+        #home .bio { font-size: 1.25rem; color: var(--text-dim); max-width: 650px; }
 
         /* --- Marquee --- */
         .marquee-wrapper {
-            background: var(--accent);
-            padding: 22px 0;
-            overflow: hidden;
-            display: flex;
-            transform: rotate(-1.5deg) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            margin: 60px 0 100px;
-            z-index: 10;
-            position: relative;
+            background: var(--accent); padding: 22px 0; overflow: hidden; display: flex;
+            transform: rotate(-1.5deg) scale(1.05); box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            margin: 40px 0 80px; z-index: 10; position: relative; transition: background-color 0.3s ease;
         }
-
-        .marquee-content {
-            display: flex;
-            white-space: nowrap;
-            animation: scroll 40s linear infinite;
-        }
-
+        .marquee-content { display: flex; white-space: nowrap; animation: scroll 40s linear infinite; }
         .marquee-content span {
-            font-family: 'JetBrains Mono', monospace;
-            color: #f7f3f0;
-            font-size: 0.9rem;
-            padding: 0 60px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace; color: var(--bg); font-size: 0.9rem;
+            padding: 0 60px; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease;
+        }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* --- About & Skills --- */
+        #about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text p { font-size: 1.15rem; color: var(--text-dim); margin-bottom: 20px; }
+        .about-image {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px;
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            font-size: 4rem; color: var(--border); transition: all 0.3s ease;
         }
 
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 12px; }
+        .skill-tag {
+            background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main);
+            padding: 12px 24px; border-radius: 100px; font-size: 1rem; font-weight: 600; transition: all 0.2s ease;
         }
+        .skill-tag:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: var(--text-main); }
 
         /* --- Projects --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px 180px;
-        }
-
         .project-card {
-            background: var(--card-bg);
-            border-radius: 32px;
-            padding: 40px;
-            margin-bottom: 100px;
-            border: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 30px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.03);
+            background: var(--card-bg); border-radius: 32px; padding: 40px; margin-bottom: 40px;
+            border: 1px solid var(--border); display: grid; grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.03);
+            transition: transform 0.3s, background-color 0.3s ease, border-color 0.3s ease;
         }
+        .project-card:hover { transform: translateY(-5px); }
+        .video-container { border-radius: 20px; overflow: hidden; background: #000; aspect-ratio: 16/9; box-shadow: 0 20px 40px rgba(0,0,0,0.08); user-select: none; -webkit-user-select: none; }
+        .video-container video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .video-container { pointer-events: auto; }
 
-        .video-container {
-            border-radius: 20px;
-            overflow: hidden;
-            background: #000;
-            aspect-ratio: 16/9;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        .video-container video { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Code Window Style */
         .code-window {
-            background: #121212;
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            min-height: 300px;
+            background: #0d0d0d; border-radius: 20px; overflow: hidden; display: flex;
+            flex-direction: column; height: 100%; min-height: 250px; border: 1px solid rgba(255,255,255,0.05);
         }
-
-        .window-header {
-            background: #1e1e1e;
-            padding: 12px 18px;
-            display: flex;
-            gap: 8px;
-        }
-
+        .window-header { background: #1a1a1a; padding: 12px 18px; display: flex; gap: 8px; }
         .dot { width: 10px; height: 10px; border-radius: 50%; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .code-section { padding: 20px; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin: 0; overflow-y: auto; flex-grow: 1; }
 
-        .code-section {
-            padding: 20px;
-            color: #e0e0e0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            margin: 0;
-            overflow-y: auto;
-            flex-grow: 1;
+        .project-info { grid-column: span 2; padding-top: 10px; }
+        .project-info h3 { font-size: 2.2rem; margin: 0 0 10px 0; }
+        .project-info p { color: var(--text-dim); font-size: 1.1rem; margin: 0; max-width: 800px; }
+
+        .k { color: #c678dd; } .s { color: #98c379; } .f { color: #61afef; } .c { color: #5c6370; font-style: italic; }
+
+        /* --- Timeline --- */
+        .timeline { border-left: 2px solid var(--border); padding-left: 30px; margin-left: 20px; transition: border-color 0.3s ease; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -39px; top: 5px; width: 16px; height: 16px;
+            background: var(--bg); border: 3px solid var(--accent); border-radius: 50%; transition: all 0.3s ease;
         }
+        .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 5px; display: block; }
+        .timeline-title { font-size: 1.5rem; margin-bottom: 10px; }
 
-        .project-info { grid-column: span 2; padding-top: 15px; }
-        .project-info h3 { font-size: 2rem; margin: 0 0 10px 0; letter-spacing: -1px; }
-        .project-info p { color: var(--text-dim); font-size: 1.05rem; margin: 0; max-width: 800px; }
+        /* --- Footer & Nav --- */
+        footer { background: var(--accent); color: var(--bg); padding: 100px 20px; text-align: center; margin-top: 100px; transition: background-color 0.3s ease, color 0.3s ease; }
+        footer h2 { font-size: 3rem; margin-bottom: 20px; color: var(--bg); }
+        footer p { color: var(--bg); opacity: 0.8; font-size: 1.2rem; margin-bottom: 40px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; }
+        .social-links a {
+            background: rgba(128, 128, 128, 0.2); color: var(--bg); text-decoration: none;
+            padding: 15px 30px; border-radius: 100px; font-weight: 600; transition: all 0.2s;
+        }
+        .social-links a:hover { background: var(--bg); color: var(--accent); }
 
-        /* --- Nav --- */
         nav {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            padding: 8px;
-            border-radius: 100px;
-            display: flex;
-            gap: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            z-index: 1000;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--glass);
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            padding: 8px; border-radius: 100px; display: flex; align-items: center; gap: 5px;
+            border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.1); z-index: 1000; transition: all 0.3s ease;
         }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding: 10px 20px;
-            border-radius: 100px;
-            transition: all 0.2s ease;
-        }
-
-        nav a:hover { background: white; }
-
-        /* Syntax Highlighting */
-        .k { color: #c678dd; } /* Keyword */
-        .s { color: #98c379; } /* String */
-        .f { color: #61afef; } /* Function */
-        .c { color: #5c6370; font-style: italic; } /* Comment */
-
-        .warning-banner {
-            background: #fff3cd;
-            border-bottom: 2px solid #ffc107;
-            padding: 16px 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #856404;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
+        nav a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.9rem; padding: 12px 24px; border-radius: 100px; transition: all 0.2s ease; }
+        nav a:hover { background: var(--text-main); color: var(--bg); }
+        .theme-btn { background: transparent; border: none; color: var(--text-main); font-size: 1.2rem; cursor: pointer; padding: 8px 16px; border-radius: 100px; transition: all 0.2s ease; }
+        .theme-btn:hover { background: var(--text-main); color: var(--bg); }
 
         @media (max-width: 950px) {
             .project-card { grid-template-columns: 1fr; }
             .project-info { grid-column: span 1; }
+            .about-grid { grid-template-columns: 1fr; }
+            nav { width: 90%; justify-content: center; flex-wrap: wrap; border-radius: 20px; padding: 10px;}
+            nav a { padding: 8px 12px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="warning-banner">
-        ⚠️ The code snippets displayed on this website are placeholder examples and do not represent the actual game code.
-    </div>
-
-    <header>
-        <span class="badge">Open for Commissions</span>
+    <section id="home">
+        <span class="badge">🟢 Open for Commissions</span>
         <h1>Y46ne</h1>
         <p class="bio">19yo, French 2nd-year CS Student & Full-stack Roblox Scripter. Specialized in building secure backend architectures and modular client systems.</p>
-    </header>
+    </section>
 
     <div class="marquee-wrapper">
         <div class="marquee-content">
-            <span>Luau / Roblox API</span>
-            <span>Java (Spring Boot)</span>
-            <span>JavaScript (Node.js)</span>
-            <span>Python / Data Analysis</span>
-            <span>SQL & NoSQL</span>
-            <span>Flutter Development</span>
-            <span>Git Workflow</span>
-            <span>PHP</span>
-            <span>Luau / Roblox API</span>
-            <span>Java (Spring Boot)</span>
-            <span>JavaScript (Node.js)</span>
-            <span>Python / Data Analysis</span>
-            <span>SQL & NoSQL</span>
-            <span>Flutter Development</span>
-            <span>Git Workflow</span>
-            <span>PHP</span>
+            <span>Luau / Roblox API</span><span>Java (Spring Boot)</span><span>JavaScript (Node.js)</span><span>Python / Data Analysis</span><span>SQL & NoSQL</span><span>Flutter Development</span><span>Git Workflow</span><span>PHP</span>
+            <span>Luau / Roblox API</span><span>Java (Spring Boot)</span><span>JavaScript (Node.js)</span><span>Python / Data Analysis</span><span>SQL & NoSQL</span><span>Flutter Development</span><span>Git Workflow</span><span>PHP</span>
         </div>
     </div>
 
-    <div class="container">
-        
-        <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/RPG.mp4" type="video/mp4"></video>
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">A quick glimpse into who I am and what I do.</p>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>Hello! I'm Y46ne. I'm currently in my second year of studying Computer Science in France. My journey into programming started with Roblox, but it quickly evolved into a deep passion for software engineering as a whole.</p>
+                <p>I specialize in writing highly modular, clean, and scalable code. Whether it's setting up complex backend infrastructures using DataStores and HttpService, or crafting smooth client-side gameplay loops, I focus on performance and security.</p>
+                <p>When I'm not writing Luau, you can usually find me building APIs with Spring Boot or exploring data structures.</p>
             </div>
+            <div class="about-image" style="background: transparent; border: none; overflow: visible; height: 450px; display: flex; align-items: center; justify-content: center;">
+    <style>
+        .infra-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .iso-grid {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            transform: rotateX(60deg) rotateZ(-45deg);
+            border: 2px solid var(--border);
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Rising Logic Pillars */
+        .pillar {
+            position: absolute;
+            width: 30px;
+            background: var(--text-main);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .p1 { height: 80px; left: 80px; top: 80px; animation: p-float 4s ease-in-out infinite; }
+        .p2 { height: 120px; right: 120px; top: 40px; animation: p-float 6s ease-in-out infinite 1s; opacity: 0.4; }
+        .p3 { height: 60px; left: 160px; bottom: 80px; animation: p-float 5s ease-in-out infinite 0.5s; }
+        .p4 { height: 100px; right: 60px; bottom: 140px; animation: p-float 7s ease-in-out infinite 2s; opacity: 0.6; }
+
+        @keyframes p-float {
+            0%, 100% { transform: translateZ(0px); height: 80px; }
+            50% { transform: translateZ(20px); height: 110px; }
+        }
+
+        /* Moving Data Packets */
+        .packet {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--text-main);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--text-main);
+        }
+
+        .h-line {
+            position: absolute;
+            height: 1px;
+            background: var(--text-dim);
+            opacity: 0.2;
+        }
+
+        /* Floating Hex Labels */
+        .hex-label {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+            transform: rotateZ(45deg) rotateX(-60deg);
+        }
+
+        /* Animation for the packet moving along grid lines */
+        .stream {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--text-main), transparent);
+            animation: flow 3s linear infinite;
+        }
+
+        @keyframes flow {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+
+    <div class="infra-container">
+        <div class="iso-grid">
+            <div class="pillar p1"></div>
+            <div class="pillar p2"></div>
+            <div class="pillar p3"></div>
+            <div class="pillar p4"></div>
+
+            <div style="position: absolute; top: 120px; width: 100%;" class="stream"></div>
+            <div style="position: absolute; top: 240px; width: 100%;" class="stream"></div>
+            <div style="position: absolute; left: 160px; height: 100%; width: 1px; background: var(--border);" class="v-stream"></div>
+        </div>
+
+        <div class="hex-label" style="top: 20%; left: 10%;">0x3F2A_INIT</div>
+        <div class="hex-label" style="bottom: 15%; right: 5%;">SYS_READY</div>
+        <div class="hex-label" style="top: 40%; right: 20%;">NET_LNK</div>
+        
+        <div style="position: absolute; width: 300px; height: 300px; border: 1px solid var(--border); border-radius: 50%; opacity: 0.1;"></div>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">My Arsenal</h2>
+        <p class="section-subtitle">Languages, frameworks, and tools I use on a daily basis to bring ideas to life.</p>
+        <div class="skills-container">
+            <div class="skill-tag">Roblox Studio / Luau</div>
+            <div class="skill-tag">Java (Spring Boot)</div>
+            <div class="skill-tag">JavaScript / TypeScript</div>
+            <div class="skill-tag">Node.js</div>
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">SQL & MongoDB</div>
+            <div class="skill-tag">Git & GitHub</div>
+            <div class="skill-tag">Flutter / Dart</div>
+            <div class="skill-tag">Rojo Workflow</div>
+            <div class="skill-tag">Object-Oriented Programming</div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Selected Works</h2>
+        <p class="section-subtitle">A collection of systems and mechanics I've engineered on the Roblox platform.</p>
+
+        <div class="warning-banner">
+        ⚠️ The code snippets displayed on this website are placeholder examples and do not represent the actual game code.
+    </div>
+    <br>
+
+        <h3 class="category-title">📂 Core Frameworks & Ecosystems</h3>
+
+        <div class="project-card">
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/RPG.mp4"></video></div>
             <div class="code-window">
                 <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
                 <pre class="code-section"><code><span class="c">-- Modular NPC AI</span>
@@ -281,101 +390,7 @@
         </div>
 
         <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/BloxGrid.mp4" type="video/mp4"></video>
-            </div>
-            <div class="code-window">
-                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <pre class="code-section"><code><span class="c">-- 3D Grid Snapping Logic</span>
-<span class="k">local</span> <span class="k">function</span> <span class="f">snapToGrid</span>(position)
-    <span class="k">local</span> x = math.<span class="f">round</span>(position.X / GRID_SIZE) * GRID_SIZE
-    <span class="k">local</span> z = math.<span class="f">round</span>(position.Z / GRID_SIZE) * GRID_SIZE
-    <span class="k">return</span> Vector3.<span class="f">new</span>(x, 0, z)
-<span class="k">end</span>
-
-<span class="c">-- Line clear algorithm</span>
-<span class="k">if</span> <span class="f">isRowFull</span>(yIndex) <span class="k">then</span>
-    <span class="f">clearRow</span>(yIndex)
-    score += <span class="s">100</span>
-<span class="k">end</span></code></pre>
-            </div>
-            <div class="project-info">
-                <h3>Grid-Based Puzzle System</h3>
-                <p>A "Block Blast" style 2D puzzle logic implemented on a 3D grid. Features complex part-snapping, collision detection, and efficient line-clearing algorithms.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/Procedural.mp4" type="video/mp4"></video>
-            </div>
-            <div class="code-window">
-                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <pre class="code-section"><code><span class="c">-- Asset Placement Math</span>
-<span class="k">for</span> x = <span class="s">1</span>, mapSize <span class="k">do</span>
-    <span class="k">local</span> noise = math.<span class="f">noise</span>(x * freq, z * freq)
-    <span class="k">if</span> noise > <span class="s">0.5</span> <span class="k">then</span>
-        <span class="k">local</span> house = Assets.House:<span class="f">Clone</span>()
-        house:SetPrimaryPartCFrame(CFrame.<span class="f">new</span>(x, <span class="s">0</span>, z))
-        house.Parent = workspace
-    <span class="k">end</span>
-<span class="k">end</span></code></pre>
-            </div>
-            <div class="project-info">
-                <h3>Procedural Medieval Maps</h3>
-                <p>Coordinate-based generation that creates unique medieval layouts dynamically. Maintains high performance by optimizing part counts and asset reuse.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/PopulationRNG.mp4" type="video/mp4"></video>
-            </div>
-            <div class="code-window">
-                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <pre class="code-section"><code><span class="c">-- GitHub API Integration</span>
-<span class="k">local</span> Http = game:<span class="f">GetService</span>(<span class="s">"HttpService"</span>)
-<span class="k">local</span> URL = <span class="s">"https://api.github.com/repos/..."</span>
-
-<span class="k">local</span> <span class="k">function</span> <span class="f">saveData</span>(data)
-    <span class="k">local</span> payload = Http:<span class="f">JSONEncode</span>(data)
-    Http:<span class="f">PostAsync</span>(URL, payload, Enum.HttpContentType.ApplicationJson)
-<span class="k">end</span></code></pre>
-            </div>
-            <div class="project-info">
-                <h3>External Data RNG</h3>
-                <p>Bypassing traditional DataStores using HttpService to serialize and fetch player data directly from a remote GitHub repository.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/TriviaQuestion.mp4" type="video/mp4"></video>
-            </div>
-            <div class="code-window">
-                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <pre class="code-section"><code><span class="c">-- Live Question Feed</span>
-<span class="k">local</span> <span class="k">function</span> <span class="f">refreshQuestions</span>()
-    <span class="k">local</span> rawData = Http:<span class="f">GetAsync</span>(GIT_DB_URL)
-    <span class="k">local</span> db = Http:<span class="f">JSONDecode</span>(rawData)
-    <span class="k">return</span> db[math.<span class="f">random</span>(<span class="s">1</span>, #db)]
-<span class="k">end</span>
-
-<span class="c">-- Real-time validation</span>
-<span class="k">if</span> input == currentQuestion.Answer <span class="k">then</span>
-    <span class="f">grantPoints</span>(player)
-<span class="k">end</span></code></pre>
-            </div>
-            <div class="project-info">
-                <h3>Real-time Trivia (JKLM Style)</h3>
-                <p>Live question database hosted on GitHub. Allows content updates without restarting servers. Features real-time answer validation and scoring.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/MemoryCard.mp4" type="video/mp4"></video>
-            </div>
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/MemoryCard.mp4"></video></div>
             <div class="code-window">
                 <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
                 <pre class="code-section"><code><span class="c">-- Match Detection</span>
@@ -399,9 +414,52 @@
         </div>
 
         <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/IncrementalGame.mp4" type="video/mp4"></video>
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/Procedural.mp4"></video></div>
+            <div class="code-window">
+                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre class="code-section"><code><span class="c">-- Asset Placement Math</span>
+<span class="k">for</span> x = <span class="s">1</span>, mapSize <span class="k">do</span>
+    <span class="k">local</span> noise = math.<span class="f">noise</span>(x * freq, z * freq)
+    <span class="k">if</span> noise > <span class="s">0.5</span> <span class="k">then</span>
+        <span class="k">local</span> house = Assets.House:<span class="f">Clone</span>()
+        house:SetPrimaryPartCFrame(CFrame.<span class="f">new</span>(x, <span class="s">0</span>, z))
+        house.Parent = workspace
+    <span class="k">end</span>
+<span class="k">end</span></code></pre>
             </div>
+            <div class="project-info">
+                <h3>Procedural Medieval Maps</h3>
+                <p>Coordinate-based generation that creates unique medieval layouts dynamically. Maintains high performance by optimizing part counts and asset reuse.</p>
+            </div>
+        </div>
+
+        <h3 class="category-title">⚙️ Game Mechanics & Logic</h3>
+
+        <div class="project-card">
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/BloxGrid.mp4"></video></div>
+            <div class="code-window">
+                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre class="code-section"><code><span class="c">-- 3D Grid Snapping Logic</span>
+<span class="k">local</span> <span class="k">function</span> <span class="f">snapToGrid</span>(position)
+    <span class="k">local</span> x = math.<span class="f">round</span>(position.X / GRID_SIZE) * GRID_SIZE
+    <span class="k">local</span> z = math.<span class="f">round</span>(position.Z / GRID_SIZE) * GRID_SIZE
+    <span class="k">return</span> Vector3.<span class="f">new</span>(x, 0, z)
+<span class="k">end</span>
+
+<span class="c">-- Line clear algorithm</span>
+<span class="k">if</span> <span class="f">isRowFull</span>(yIndex) <span class="k">then</span>
+    <span class="f">clearRow</span>(yIndex)
+    score += <span class="s">100</span>
+<span class="k">end</span></code></pre>
+            </div>
+            <div class="project-info">
+                <h3>Grid-Based Puzzle System</h3>
+                <p>A "Block Blast" style 2D puzzle logic implemented on a 3D grid. Features complex part-snapping, collision detection, and efficient line-clearing algorithms.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/IncrementalGame.mp4"></video></div>
             <div class="code-window">
                 <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
                 <pre class="code-section"><code><span class="c">-- Exponential Growth Math</span>
@@ -419,9 +477,7 @@
         </div>
 
         <div class="project-card">
-            <div class="video-container">
-                <video autoplay muted loop playsinline><source src="assets/Flashbang.mp4" type="video/mp4"></video>
-            </div>
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/Flashbang.mp4"></video></div>
             <div class="code-window">
                 <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
                 <pre class="code-section"><code><span class="c">-- Flashbang Throw Mechanics</span>
@@ -448,14 +504,212 @@
             </div>
         </div>
 
-    </div>
+        <h3 class="category-title">🌐 Backend & API Integrations</h3>
+
+        <div class="project-card">
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/PopulationRNG.mp4"></video></div>
+            <div class="code-window">
+                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre class="code-section"><code><span class="c">-- GitHub API Integration</span>
+<span class="k">local</span> Http = game:<span class="f">GetService</span>(<span class="s">"HttpService"</span>)
+<span class="k">local</span> URL = <span class="s">"https://api.github.com/repos/..."</span>
+
+<span class="k">local</span> <span class="k">function</span> <span class="f">saveData</span>(data)
+    <span class="k">local</span> payload = Http:<span class="f">JSONEncode</span>(data)
+    Http:<span class="f">PostAsync</span>(URL, payload, Enum.HttpContentType.ApplicationJson)
+<span class="k">end</span></code></pre>
+            </div>
+            <div class="project-info">
+                <h3>External Data RNG</h3>
+                <p>Bypassing traditional DataStores using HttpService to serialize and fetch player data directly from a remote GitHub repository.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="video-container"><video autoplay muted loop playsinline controlsList="nodownload" data-video-src="assets/TriviaQuestion.mp4"></video></div>
+            <div class="code-window">
+                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre class="code-section"><code><span class="c">-- Live Question Feed</span>
+<span class="k">local</span> <span class="k">function</span> <span class="f">refreshQuestions</span>()
+    <span class="k">local</span> rawData = Http:<span class="f">GetAsync</span>(GIT_DB_URL)
+    <span class="k">local</span> db = Http:<span class="f">JSONDecode</span>(rawData)
+    <span class="k">return</span> db[math.<span class="f">random</span>(<span class="s">1</span>, #db)]
+<span class="k">end</span>
+
+<span class="c">-- Real-time validation</span>
+<span class="k">if</span> input == currentQuestion.Answer <span class="k">then</span>
+    <span class="f">grantPoints</span>(player)
+<span class="k">end</span></code></pre>
+            </div>
+            <div class="project-info">
+                <h3>Real-time Trivia (JKLM Style)</h3>
+                <p>Live question database hosted on GitHub. Allows content updates without restarting servers. Features real-time answer validation and scoring.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experience & Journey</h2>
+        <p class="section-subtitle">My progression as a developer over the years.</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-date">2024 - Present</span>
+                <h3 class="timeline-title">2nd-Year Computer Science Student</h3>
+                <p style="color: var(--text-dim);">Deepening my knowledge of algorithms, data structures, and lower-level programming concepts at university in France.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">2021 - Present</span>
+                <h3 class="timeline-title">Freelance Roblox Programmer</h3>
+                <p style="color: var(--text-dim);">Collaborating with various clients and studios to build robust game architectures, UI behaviors, and secure monetization systems.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">2019</span>
+                <h3 class="timeline-title">Started Scripting</h3>
+                <p style="color: var(--text-dim);">Wrote my very first lines of code in Roblox Studio, sparking a lifelong interest in software development.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Let's build something together.</h2>
+        <p>Currently accepting new commission inquiries and studio positions.</p>
+        <div class="social-links">
+            <a href="https://discord.com/users/y46ne" target="_blank">Discord (@y46ne)</a>
+            <a href="https://www.roblox.com/users/935816226/profile" target="_blank">Roblox Profile</a>
+            <a href="https://youtube.com/@Y46ne" target="_blank">YouTube</a>
+        </div>
+        <br><br>
+    </footer>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="https://discord.com/users/y46ne">Discord</a>
-        <a href="https://www.roblox.com/users/935816226/profile">Roblox</a>
-        <a href="https://youtube.com/@Y46ne">YouTube</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="theme-btn" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">☾</button>
     </nav>
+
+    <script>
+        // Asset Protection: Load videos and images dynamically with blob URLs to hide from DevTools Network tab
+        const loadedAssets = new Map();
+
+        async function loadAssetAsBlob(element, assetPath, isVideo = false) {
+            if (loadedAssets.has(assetPath)) {
+                const blobUrl = loadedAssets.get(assetPath);
+                if (isVideo) {
+                    element.src = blobUrl;
+                } else {
+                    element.src = blobUrl;
+                }
+                return;
+            }
+
+            try {
+                const response = await fetch(assetPath);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                loadedAssets.set(assetPath, blobUrl);
+                if (isVideo) {
+                    element.src = blobUrl;
+                } else {
+                    element.src = blobUrl;
+                }
+            } catch (error) {
+                console.warn('Asset load failed:', assetPath);
+            }
+        }
+
+        // Load all videos when they come into view (Intersection Observer)
+        const videoElements = document.querySelectorAll('video[data-video-src]');
+        const imageElements = document.querySelectorAll('img[data-img-src]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    if (element.tagName === 'VIDEO') {
+                        const assetPath = element.getAttribute('data-video-src');
+                        if (assetPath && !element.src) {
+                            loadAssetAsBlob(element, assetPath, true);
+                        }
+                    } else if (element.tagName === 'IMG') {
+                        const assetPath = element.getAttribute('data-img-src');
+                        if (assetPath && !element.src) {
+                            loadAssetAsBlob(element, assetPath, false);
+                        }
+                    }
+                }
+            });
+        }, { rootMargin: '50px' });
+
+        videoElements.forEach(video => observer.observe(video));
+        imageElements.forEach(img => observer.observe(img));
+
+        // Anti-DevTools: Detect and disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'C')) {
+                e.preventDefault();
+                return false;
+            }
+            // Prevent Ctrl+S, Ctrl+Shift+S
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                return false;
+            }
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent right-click context menu on videos and images
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('.video-container')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent drag and drop on videos
+        const videos = document.querySelectorAll('.video-container video');
+        videos.forEach(video => {
+            video.addEventListener('dragstart', (e) => e.preventDefault());
+            video.parentElement.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+
+        // Prevent image drag and drop
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeToggle.textContent = '☀︎';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            if (body.classList.contains('dark-theme')) {
+                themeToggle.textContent = '☀︎';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '☾';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 
 </body>
 </html>
