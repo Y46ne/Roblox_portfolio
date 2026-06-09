@@ -62,7 +62,6 @@
         }
 
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -77,7 +76,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* --- Typography & Basics --- */
         h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -1px; }
         .section-title { font-size: 3rem; margin-bottom: 20px; letter-spacing: -2px; color: var(--text-main); }
         .section-subtitle { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 60px; max-width: 600px; }
@@ -147,7 +145,7 @@
         }
         .skill-tag:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: var(--text-main); }
 
-        /* --- Projects --- */
+        /* --- Regular Project Cards --- */
         .project-card {
             background: var(--card-bg); border-radius: 32px; padding: 40px; margin-bottom: 40px;
             border: 1px solid var(--border); display: grid; grid-template-columns: 1.1fr 0.9fr;
@@ -173,6 +171,232 @@
         .project-info p { color: var(--text-dim); font-size: 1.1rem; margin: 0; max-width: 800px; }
 
         .k { color: #c678dd; } .s { color: #98c379; } .f { color: #61afef; } .c { color: #5c6370; font-style: italic; }
+
+        /* ═══════════════════════════════════
+           TETHERLESS CARD
+        ═══════════════════════════════════ */
+
+        .teth-card {
+            background: #0D0F13;
+            border-radius: 28px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 60px 120px rgba(0,0,0,0.25);
+        }
+
+        .teth-top {
+            padding: 32px 40px 28px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .teth-name {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 600;
+            letter-spacing: -2px;
+            line-height: 1;
+            color: #e8eaf0;
+            margin: 0 0 10px 0;
+        }
+
+        .teth-tagline {
+            font-size: 0.9rem;
+            color: #4e5562;
+            margin: 0;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .teth-status {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border-radius: 6px;
+            background: rgba(192,57,43,0.1);
+            border: 1px solid rgba(192,57,43,0.25);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #c07060;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .teth-status::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #C0392B;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+        .teth-video {
+            width: 100%;
+            aspect-ratio: 16/7;
+            background: #060809;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .teth-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .teth-video::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(13,15,19,.5) 0%, transparent 30%, transparent 65%, rgba(13,15,19,.85) 100%);
+            pointer-events: none;
+        }
+
+        .teth-desc-row {
+            padding: 32px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .teth-pitch {
+            color: #8a9099;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .teth-pitch strong {
+            color: #c5cad4;
+            font-weight: 500;
+        }
+
+        .teth-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: flex-start;
+            padding-top: 4px;
+        }
+
+        .teth-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            color: #4e5562;
+            letter-spacing: 0.3px;
+        }
+
+        .teth-mechanics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .mech {
+            background: #0D0F13;
+            padding: 28px 32px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: background 0.15s;
+        }
+
+        .mech:hover { background: #101318; }
+
+        .mech-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #2a3040;
+            letter-spacing: 1px;
+            padding-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .mech-body { flex: 1; min-width: 0; }
+
+        .mech-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #c5cad4;
+            margin: 0 0 10px 0;
+        }
+
+        .mech-code {
+            background: #080a0e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .mech-code-bar {
+            padding: 7px 12px;
+            background: #0c0e12;
+            display: flex;
+            gap: 5px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .cd { width: 8px; height: 8px; border-radius: 50%; }
+        .cd-r { background: #ff5f5630; } .cd-y { background: #ffbd2e30; } .cd-g { background: #27c93f30; }
+
+        .mech-code pre {
+            margin: 0;
+            padding: 12px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            line-height: 1.75;
+            color: #c9d1d9;
+            overflow-x: auto;
+        }
+
+        .mech-desc {
+            font-size: 0.82rem;
+            color: #4e5562;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .teth-bottom {
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .teth-link {
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #3a4050;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .teth-link:hover { color: #c07060; }
+
+        /* Tetherless syntax colors */
+        .tk { color: #c678dd; } .ts { color: #98c379; } .tf { color: #7dcfff; }
+        .tc { color: #2e3c3a; font-style: italic; } .tn { color: #e5c07b; }
 
         /* --- Timeline --- */
         .timeline { border-left: 2px solid var(--border); padding-left: 30px; margin-left: 20px; transition: border-color 0.3s ease; }
@@ -210,6 +434,10 @@
             .project-card { grid-template-columns: 1fr; }
             .project-info { grid-column: span 1; }
             .about-grid { grid-template-columns: 1fr; }
+            .teth-mechanics { grid-template-columns: 1fr; }
+            .teth-desc-row { grid-template-columns: 1fr; gap: 20px; }
+            .teth-top { flex-direction: column; gap: 14px; }
+            .teth-video { aspect-ratio: 16/9; }
             nav { width: 90%; justify-content: center; flex-wrap: wrap; border-radius: 20px; padding: 10px;}
             nav a { padding: 8px 12px; }
         }
@@ -241,110 +469,28 @@
             </div>
             <div class="about-image" style="background: transparent; border: none; overflow: visible; height: 450px; display: flex; align-items: center; justify-content: center;">
     <style>
-        .infra-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            perspective: 1000px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .iso-grid {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            transform: rotateX(60deg) rotateZ(-45deg);
-            border: 2px solid var(--border);
-            background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Rising Logic Pillars */
-        .pillar {
-            position: absolute;
-            width: 30px;
-            background: var(--text-main);
-            opacity: 0.8;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-
+        .infra-container { position: relative; width: 100%; height: 100%; perspective: 1000px; display: flex; align-items: center; justify-content: center; }
+        .iso-grid { position: absolute; width: 400px; height: 400px; transform: rotateX(60deg) rotateZ(-45deg); border: 2px solid var(--border); background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 40px 40px; display: flex; align-items: center; justify-content: center; }
+        .pillar { position: absolute; width: 30px; background: var(--text-main); opacity: 0.8; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
         .p1 { height: 80px; left: 80px; top: 80px; animation: p-float 4s ease-in-out infinite; }
         .p2 { height: 120px; right: 120px; top: 40px; animation: p-float 6s ease-in-out infinite 1s; opacity: 0.4; }
         .p3 { height: 60px; left: 160px; bottom: 80px; animation: p-float 5s ease-in-out infinite 0.5s; }
         .p4 { height: 100px; right: 60px; bottom: 140px; animation: p-float 7s ease-in-out infinite 2s; opacity: 0.6; }
-
-        @keyframes p-float {
-            0%, 100% { transform: translateZ(0px); height: 80px; }
-            50% { transform: translateZ(20px); height: 110px; }
-        }
-
-        /* Moving Data Packets */
-        .packet {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--text-main);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--text-main);
-        }
-
-        .h-line {
-            position: absolute;
-            height: 1px;
-            background: var(--text-dim);
-            opacity: 0.2;
-        }
-
-        /* Floating Hex Labels */
-        .hex-label {
-            position: absolute;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            opacity: 0.5;
-            transform: rotateZ(45deg) rotateX(-60deg);
-        }
-
-        /* Animation for the packet moving along grid lines */
-        .stream {
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-main), transparent);
-            animation: flow 3s linear infinite;
-        }
-
-        @keyframes flow {
-            0% { transform: translateX(-100%); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateX(100%); opacity: 0; }
-        }
+        @keyframes p-float { 0%, 100% { transform: translateZ(0px); height: 80px; } 50% { transform: translateZ(20px); height: 110px; } }
+        .stream { position: absolute; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--text-main), transparent); animation: flow 3s linear infinite; }
+        @keyframes flow { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translateX(100%); opacity: 0; } }
+        .hex-label { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-dim); opacity: 0.5; transform: rotateZ(45deg) rotateX(-60deg); }
     </style>
-
     <div class="infra-container">
         <div class="iso-grid">
-            <div class="pillar p1"></div>
-            <div class="pillar p2"></div>
-            <div class="pillar p3"></div>
-            <div class="pillar p4"></div>
-
+            <div class="pillar p1"></div><div class="pillar p2"></div><div class="pillar p3"></div><div class="pillar p4"></div>
             <div style="position: absolute; top: 120px; width: 100%;" class="stream"></div>
             <div style="position: absolute; top: 240px; width: 100%;" class="stream"></div>
             <div style="position: absolute; left: 160px; height: 100%; width: 1px; background: var(--border);" class="v-stream"></div>
         </div>
-
         <div class="hex-label" style="top: 20%; left: 10%;">0x3F2A_INIT</div>
         <div class="hex-label" style="bottom: 15%; right: 5%;">SYS_READY</div>
         <div class="hex-label" style="top: 40%; right: 20%;">NET_LNK</div>
-        
         <div style="position: absolute; width: 300px; height: 300px; border: 1px solid var(--border); border-radius: 50%; opacity: 0.1;"></div>
     </div>
 </div>
@@ -378,9 +524,213 @@
         <p class="section-subtitle">A collection of systems and mechanics I've engineered on the Roblox platform.</p>
 
         <div class="warning-banner">
-        ⚠️ The code snippets displayed on this website are placeholder examples and do not represent the actual game code.
-    </div>
-    <br>
+            ⚠️ The code snippets displayed on this website are placeholder examples and do not represent the actual game code.
+        </div>
+        <br>
+
+        <!-- ══════════════════════════════════════
+             TETHERLESS — PRINCIPAL PROJECT
+        ══════════════════════════════════════ -->
+
+        <h3 class="category-title">🎮 Principal Project</h3>
+
+        <div class="teth-card">
+
+            <div class="teth-top">
+                <div>
+                    <h2 class="teth-name">Tetherless</h2>
+                    <p class="teth-tagline">Fast-paced Roblox FPS. Dual-wield, slide, wall-jump, lunge instakill. Solo developed.</p>
+                </div>
+                <span class="teth-status">In Development</span>
+            </div>
+
+            <!-- replace src with your gameplay clip -->
+            <div class="teth-video">
+                <video autoplay muted loop playsinline data-video-src="assets/Tetherless_gameplay.mp4"></video>
+            </div>
+
+            <div class="teth-desc-row">
+                <p class="teth-pitch">
+                    Players spawn with nothing — weapons are scattered across the map, first come first armed.
+                    Pick up two one-handers and you're <strong>dual-wielding</strong>, LMB and RMB firing independently.
+                    Run a mag dry and the gun drops automatically; keep moving or you're dead.
+                    Three modes — <strong>FFA, 1v1 Duels, 2v2 Wingman</strong> — all feeding into an <strong>Elo-based ranked queue</strong>.
+                </p>
+                <div class="teth-tags">
+                    <span class="teth-tag">Luau OOP</span>
+                    <span class="teth-tag">Multi-ray raycasting</span>
+                    <span class="teth-tag">Catmull-Rom spline</span>
+                    <span class="teth-tag">UI state machine</span>
+                    <span class="teth-tag">IK weapon grips</span>
+                    <span class="teth-tag">DataStore v2</span>
+                    <span class="teth-tag">Elo ranking</span>
+                    <span class="teth-tag">PathfindingService</span>
+                </div>
+            </div>
+
+            <div class="teth-mechanics">
+
+                <div class="mech">
+                    <span class="mech-num">01</span>
+                    <div class="mech-body">
+                        <h4 class="mech-title">Movement System</h4>
+                        <div class="mech-code">
+                            <div class="mech-code-bar"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+                            <pre><code><span class="tc">-- slide-jump: sprint → C → SPACE</span>
+<span class="tk">if</span> state == <span class="ts">"sliding"</span> <span class="tk">and</span> jumpInput <span class="tk">then</span>
+    <span class="tk">local</span> dir = root.CFrame.LookVector
+    root.AssemblyLinearVelocity =
+        dir * SLIDE_JUMP_FORCE
+        + Vector3.<span class="tf">new</span>(<span class="tn">0</span>, JUMP_HEIGHT, <span class="tn">0</span>)
+    state = <span class="ts">"airborne"</span>
+<span class="tk">end</span>
+
+<span class="tc">-- wall jump (up to 3 consecutive)</span>
+<span class="tk">if</span> wallHit <span class="tk">and</span> wallJumpsLeft > <span class="tn">0</span> <span class="tk">then</span>
+    root.AssemblyLinearVelocity =
+        wallNormal * WALL_LATERAL
+        + Vector3.<span class="tf">new</span>(<span class="tn">0</span>, WALL_VERTICAL, <span class="tn">0</span>)
+    wallJumpsLeft -= <span class="tn">1</span>
+<span class="tk">end</span></code></pre>
+                        </div>
+                        <p class="mech-desc">Sprint, crouch, slide, slide-jump, and up to 3 consecutive wall jumps before landing. Movement runs through a state machine so none of these ever conflict. The katana adds passive bonuses on top: 15% speed, 20% jump height, double wall-jump force.</p>
+                    </div>
+                </div>
+
+                <div class="mech">
+                    <span class="mech-num">02</span>
+                    <div class="mech-body">
+                        <h4 class="mech-title">Dual-Wield Weapon System</h4>
+                        <div class="mech-code">
+                            <div class="mech-code-bar"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+                            <pre><code><span class="tc">-- two independent hand slots</span>
+<span class="tk">local</span> hands = {
+    left  = <span class="tf">Hand</span>.<span class="tf">new</span>(),
+    right = <span class="tf">Hand</span>.<span class="tf">new</span>()
+}
+
+<span class="tc">-- walk over weapon → fills next open slot</span>
+<span class="tk">function</span> <span class="tf">pickUp</span>(weaponDef)
+    <span class="tk">local</span> slot = hands.right.empty
+        <span class="tk">and</span> <span class="ts">"right"</span> <span class="tk">or</span> <span class="ts">"left"</span>
+    hands[slot]:<span class="tf">equip</span>(weaponDef)
+<span class="tk">end</span>
+
+<span class="tc">-- mag runs dry → auto-drop</span>
+<span class="tk">if</span> hand.ammo <= <span class="tn">0</span> <span class="tk">then</span>
+    <span class="tf">dropWeapon</span>(hand); hand:<span class="tf">clear</span>()
+<span class="tk">end</span></code></pre>
+                        </div>
+                        <p class="mech-desc">Left and right hand slots managed independently. One-handers stack — LMB fires right, RMB fires left. Two-handers (rifles, launchers) claim both slots. Each hand tracks its own mag and auto-drops on empty. Weapon positioning handled via RigidConstraint + IKControl on the off-hand grip.</p>
+                    </div>
+                </div>
+
+                <div class="mech">
+                    <span class="mech-num">03</span>
+                    <div class="mech-body">
+                        <h4 class="mech-title">Katana — Arc Slash & Lunge Instakill</h4>
+                        <div class="mech-code">
+                            <div class="mech-code-bar"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+                            <pre><code><span class="tc">-- 14 rays fanned across 140°</span>
+<span class="tk">for</span> i = <span class="tn">0</span>, RAYS - <span class="tn">1</span> <span class="tk">do</span>
+    <span class="tk">local</span> angle = <span class="tf">lerp</span>(-<span class="tn">70</span>, <span class="tn">70</span>, i/(RAYS-<span class="tn">1</span>))
+    <span class="tk">local</span> dir = CFrame.<span class="tf">Angles</span>(<span class="tn">0</span>,<span class="tf">rad</span>(angle),<span class="tn">0</span>)
+        * lookVec
+    <span class="tf">castRay</span>(chestOrigin, dir, hitSet)
+<span class="tk">end</span>
+
+<span class="tc">-- right-click: 120 studs/s lunge instakill</span>
+<span class="tk">if</span> payload.Secondary <span class="tk">then</span>
+    root.AssemblyLinearVelocity =
+        aimDir * <span class="tn">120</span>
+    <span class="tf">onHit</span>(target, <span class="tn">9999</span>)
+<span class="tk">end</span></code></pre>
+                        </div>
+                        <p class="mech-desc">Primary slash fans 14 raycasts across 140° cast from chest height — not the camera — so crouching targets are never missed. A dedup set prevents multi-hit on the same target per swing. Right-click lunges at 120 studs/s and instakills on contact. Holding the katana passively buffs speed ×1.15, jump ×1.2, wall-jump force ×2.</p>
+                    </div>
+                </div>
+
+                <div class="mech">
+                    <span class="mech-num">04</span>
+                    <div class="mech-body">
+                        <h4 class="mech-title">Cinematic Menu Camera</h4>
+                        <div class="mech-code">
+                            <div class="mech-code-bar"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+                            <pre><code><span class="tc">-- Catmull-Rom along Studio waypoints</span>
+<span class="tk">local</span> t = (tick() * speed) % #pts
+<span class="tk">local</span> seg = <span class="tf">math.floor</span>(t)
+<span class="tk">local</span> pos = <span class="tf">catmullRom</span>(
+    pts[seg-<span class="tn">1</span>], pts[seg],
+    pts[seg+<span class="tn">1</span>], pts[seg+<span class="tn">2</span>],
+    t - seg
+)
+<span class="tc">-- asymmetric slope: punchy down, soft up</span>
+speed = dY < <span class="tn">0</span>
+    <span class="tk">and</span> BASE * <span class="tn">1.4</span>   <span class="tc">-- downhill</span>
+    <span class="tk">or</span>  BASE * <span class="tn">0.25</span>  <span class="tc">-- uphill</span></code></pre>
+                        </div>
+                        <p class="mech-desc">Catmull-Rom spline drives a map flythrough while the menu is open. Speed is asymmetric by slope: descents accelerate hard (1.4×), ascents barely dip (0.25×) — like a heavy vehicle holding momentum. Waypoints are Studio parts, so the path updates without touching code.</p>
+                    </div>
+                </div>
+
+                <div class="mech">
+                    <span class="mech-num">05</span>
+                    <div class="mech-body">
+                        <h4 class="mech-title">Main Menu — UI State Machine</h4>
+                        <div class="mech-code">
+                            <div class="mech-code-bar"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+                            <pre><code><span class="tc">-- 5 decoupled controllers via event bus</span>
+<span class="tc">-- Nav → Page → Lobby/Settings/Shop</span>
+<span class="tk">function</span> PageController:<span class="tf">Open</span>(id)
+    <span class="tk">if</span> self._current == id
+        <span class="tk">then return end</span>
+    <span class="tf">self:_close</span>(self._current)
+    self._current = id
+    <span class="tf">self:_open</span>(id)
+<span class="tk">end</span>
+
+NavList.<span class="tf">onSelect</span>:<span class="tf">Connect</span>(<span class="tk">function</span>(id)
+    PageController:<span class="tf">Open</span>(id)
+<span class="tk">end</span>)</code></pre>
+                        </div>
+                        <p class="mech-desc">Five controllers (NavList, Page, Lobby, Settings, Shop) talk through an event bus — no direct references between them. Each page owns its open/close lifecycle. Adding a new screen means writing one controller, not touching the others.</p>
+                    </div>
+                </div>
+
+                <div class="mech">
+                    <span class="mech-num">06</span>
+                    <div class="mech-body">
+                        <h4 class="mech-title">Match System & Elo Ranking</h4>
+                        <div class="mech-code">
+                            <div class="mech-code-bar"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+                            <pre><code><span class="tc">-- standard Elo formula</span>
+<span class="tk">local</span> <span class="tk">function</span> <span class="tf">expected</span>(rA, rB)
+    <span class="tk">return</span> <span class="tn">1</span>/(<span class="tn">1</span> + <span class="tn">10</span>^((rB-rA)/<span class="tn">400</span>))
+<span class="tk">end</span>
+<span class="tk">local</span> delta = K * (score - <span class="tf">expected</span>(rA,rB))
+
+<span class="tc">-- MatchManager: Waiting → Active → Ended</span>
+<span class="tk">function</span> Match:<span class="tf">_onEliminated</span>(p)
+    <span class="tk">if</span> #<span class="tf">self:_alive</span>() == <span class="tn">1</span> <span class="tk">then</span>
+        <span class="tf">self:_end</span>()
+    <span class="tk">end</span>
+<span class="tk">end</span></code></pre>
+                        </div>
+                        <p class="mech-desc">MatchManager cycles Waiting → Active → Ended. On end, Elo deltas are calculated for all participants and persisted to DataStore. FFA, 1v1 Duel, and 2v2 Wingman all share the same base Match class with a different scoring hook per mode.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="teth-bottom">
+                <a href="https://www.roblox.com/games/94939546486766/Tetherless" class="teth-link" target="_blank">View on Roblox ↗</a>
+            </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════
+             OTHER PROJECTS
+        ══════════════════════════════════════ -->
 
         <h3 class="category-title">📂 Core Frameworks & Ecosystems</h3>
 
@@ -506,7 +856,6 @@
     bang.Velocity = velocity
     bang.Parent = workspace
     
-    <span class="c">-- Trigger flash effect on impact</span>
     <span class="k">local</span> <span class="k">function</span> <span class="f">onHit</span>()
         <span class="k">for</span> _, humanoid <span class="k">in</span> <span class="f">pairs</span>(game.Players) <span class="k">do</span>
             <span class="k">local</span> dist = (humanoid.Parent.Head.Position - bang.Position).<span class="f">Magnitude</span>
@@ -612,36 +961,24 @@
     </nav>
 
     <script>
-        // Asset Protection: Load videos and images dynamically with blob URLs to hide from DevTools Network tab
         const loadedAssets = new Map();
 
         async function loadAssetAsBlob(element, assetPath, isVideo = false) {
             if (loadedAssets.has(assetPath)) {
-                const blobUrl = loadedAssets.get(assetPath);
-                if (isVideo) {
-                    element.src = blobUrl;
-                } else {
-                    element.src = blobUrl;
-                }
+                element.src = loadedAssets.get(assetPath);
                 return;
             }
-
             try {
                 const response = await fetch(assetPath);
                 const blob = await response.blob();
                 const blobUrl = URL.createObjectURL(blob);
                 loadedAssets.set(assetPath, blobUrl);
-                if (isVideo) {
-                    element.src = blobUrl;
-                } else {
-                    element.src = blobUrl;
-                }
+                element.src = blobUrl;
             } catch (error) {
                 console.warn('Asset load failed:', assetPath);
             }
         }
 
-        // Load all videos when they come into view (Intersection Observer)
         const videoElements = document.querySelectorAll('video[data-video-src]');
         const imageElements = document.querySelectorAll('img[data-img-src]');
         
@@ -651,14 +988,10 @@
                     const element = entry.target;
                     if (element.tagName === 'VIDEO') {
                         const assetPath = element.getAttribute('data-video-src');
-                        if (assetPath && !element.src) {
-                            loadAssetAsBlob(element, assetPath, true);
-                        }
+                        if (assetPath && !element.src) loadAssetAsBlob(element, assetPath, true);
                     } else if (element.tagName === 'IMG') {
                         const assetPath = element.getAttribute('data-img-src');
-                        if (assetPath && !element.src) {
-                            loadAssetAsBlob(element, assetPath, false);
-                        }
+                        if (assetPath && !element.src) loadAssetAsBlob(element, assetPath, false);
                     }
                 }
             });
@@ -667,48 +1000,36 @@
         videoElements.forEach(video => observer.observe(video));
         imageElements.forEach(img => observer.observe(img));
 
-        // Anti-DevTools: Detect and disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
         document.addEventListener('keydown', (e) => {
             if (e.key === 'F12' || 
                 (e.ctrlKey && e.shiftKey && e.key === 'I') ||
                 (e.ctrlKey && e.shiftKey && e.key === 'J') ||
                 (e.ctrlKey && e.shiftKey && e.key === 'C')) {
-                e.preventDefault();
-                return false;
+                e.preventDefault(); return false;
             }
-            // Prevent Ctrl+S, Ctrl+Shift+S
             if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
-                e.preventDefault();
-                return false;
+                e.preventDefault(); return false;
             }
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 's' || e.key === 'S')) {
-                e.preventDefault();
-                return false;
+                e.preventDefault(); return false;
             }
         });
 
-        // Prevent right-click context menu on videos and images
         document.addEventListener('contextmenu', (e) => {
             if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('.video-container')) {
-                e.preventDefault();
-                return false;
+                e.preventDefault(); return false;
             }
         });
 
-        // Prevent drag and drop on videos
         const videos = document.querySelectorAll('.video-container video');
         videos.forEach(video => {
             video.addEventListener('dragstart', (e) => e.preventDefault());
             video.parentElement.addEventListener('dragstart', (e) => e.preventDefault());
         });
 
-        // Prevent image drag and drop
         const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            img.addEventListener('dragstart', (e) => e.preventDefault());
-        });
+        images.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
 
-        // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
